@@ -35,9 +35,9 @@
                 maxAllBtn:  500,                // Maximum size of list in which the all button works without warning. See below.
                 selectClass:'form-control',
                 warning:    'Are you sure you want to move this many items? Doing so can cause your browser to become unresponsive.',
-                availableText: 'Available',
-                selectedText: 'Selected',
-                showingText: 'showing',
+                availableText: 'Available {0}',
+                selectedText: 'Selected {0}',
+                showingText: 'showing {0}',
                 filterText: 'Filter'
             };
 
@@ -60,7 +60,7 @@
                 filterText:  $(this).data('filterText')
             };
 
-            var options = $.extend({}, defaults, htmlOptions, paramOptions);
+            var options = $.extend({}, defaults, $.fn.DualListBox.defaults, htmlOptions, paramOptions);
 
             $.each(options, function(i, item) {
                 if (item === undefined || item === null) { throw 'DualListBox: ' + i + ' is undefined.'; }
@@ -195,22 +195,22 @@
         $(options.element).parent().attr('id', options.parent);
         $(options.parentElement).addClass('row').append(
             (options.horizontal == false ? '   <div class="col-md-5">' : '   <div class="col-md-6">') +
-            '       <h4><span class="unselected-title"></span> <small>- ' + options.showingText + ' <span class="unselected-count"></span></small></h4>' +
+            '       <h4><span class="unselected-title"></span> <small>- ' + options.showingText.replace('{0}', '<span class="unselected-count"></span>') + '</small></h4>' +
             '       <input class="filter form-control filter-unselected" type="text" placeholder="' + options.filterText + '" style="margin-bottom: 5px;">' +
             (options.horizontal == false ? '' : createHorizontalButtons(1, options.moveAllBtn)) +
             '       <select class="unselected ' + options.selectClass + '" style="height: 200px; width: 100%;" multiple></select>' +
             '   </div>' +
             (options.horizontal == false ? createVerticalButtons(options.moveAllBtn) : '') +
             (options.horizontal == false ? '   <div class="col-md-5">' : '   <div class="col-md-6">') +
-            '       <h4><span class="selected-title"></span> <small>- ' + options.showingText + ' <span class="selected-count"></span></small></h4>' +
+            '       <h4><span class="selected-title"></span> <small>- ' + options.showingText.replace('{0}', '<span class="selected-count"></span>') + '</small></h4>' +
             '       <input class="filter form-control filter-selected" type="text" placeholder="' + options.filterText + '" style="margin-bottom: 5px;">' +
             (options.horizontal == false ? '' : createHorizontalButtons(2, options.moveAllBtn)) +
             '       <select class="selected ' + options.selectClass + '" style="height: 200px; width: 100%;" multiple></select>' +
             '   </div>');
 
         $(options.parentElement + ' .selected').prop('name', $(options.element).prop('name'));
-        $(options.parentElement + ' .unselected-title').text(options.availableText + ' ' + options.title);
-        $(options.parentElement + ' .selected-title').text(options.selectedText + ' ' + options.title);
+        $(options.parentElement + ' .unselected-title').html(options.availableText.replace('{0}', options.title));
+        $(options.parentElement + ' .selected-title').html(options.selectedText.replace('{0}', options.title));
     }
 
     /** Creates the buttons when the dual list box is set in horizontal mode. */
