@@ -27,6 +27,7 @@
                 value:      'id',               // Value that is assigned to the value field in the option.
                 text:       'name',             // Text that is assigned to the option field.
                 title:      'Example',          // Title of the dual list box.
+                id:         'example',          // ID suffix for the parent element.
                 json:       true,               // Whether to retrieve the data through JSON.
                 timeout:    500,                // Timeout for when a filter search is started.
                 horizontal: false,              // Whether to layout the dual list box as horizontal or vertical.
@@ -47,6 +48,7 @@
                 value:        $(this).data('value'),
                 text:         $(this).data('text'),
                 title:        $(this).data('title'),
+                id:           $(this).data('id'),
                 json:         $(this).data('json'),
                 timeout:      $(this).data('timeout'),
                 horizontal:   $(this).data('horizontal'),
@@ -66,7 +68,7 @@
                 if (item === undefined || item === null) { throw 'DualListBox: ' + i + ' is undefined.'; }
             });
 
-            options['parent'] = 'dual-list-box-' + options.title.replace(/ /g, '_');
+            options['parent'] = 'dual-list-box-' + options.id;
             options['parentElement'] = '#' + options.parent;
 
             selected = $.extend([{}], selected);
