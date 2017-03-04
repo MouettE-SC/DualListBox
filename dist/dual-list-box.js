@@ -23,7 +23,7 @@
     $.fn.DualListBox = function(paramOptions, selected) {
         return this.each(function () {
             var defaults = {
-                element:    $(this).context,    // Select element which creates this dual list box.
+                element:    $(this),            // Select element which creates this dual list box.
                 uri:        'local.json',       // JSON file that can be opened for the data.
                 value:      'id',               // Value that is assigned to the value field in the option.
                 text:       'name',             // Text that is assigned to the option field.
@@ -44,7 +44,7 @@
             };
 
             var htmlOptions = {
-                element:      $(this).context,
+                element:      $(this),
                 uri:          $(this).data('source'),
                 value:        $(this).data('value'),
                 text:         $(this).data('text'),
