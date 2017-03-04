@@ -39,7 +39,8 @@
                 availableText: 'Available',
                 selectedText: 'Selected',
                 showingText: 'showing',
-                filterText: 'Filter'
+                filterText: 'Filter',
+                changeCallback: function() {}   // Callback function when the selected elements changes
             };
 
             var htmlOptions = {
@@ -72,6 +73,7 @@
             options['parentElement'] = '#' + options.parent;
 
             selected = $.extend([{}], selected);
+            $.each(options.element.options, function(idx, anOption) {selected.push(anOption.value); });
 
             if (options.json) {
                 addElementsViaJSON(options, selected);
@@ -102,7 +104,7 @@
                     text = item[options.text];
                 }
 
-                var isSelected = (selected.some(function (e) { return e[options.value] === item[options.value] }) === true);
+                var isSelected = (selected.some(function (e) { return e[options.value] === item[options.value] || e === item[options.value] }) === true);
                 if (!isSelected) {
                     $('<option>', {
                         value: item[options.value],
@@ -159,6 +161,8 @@
             selected.filterByText($(options.parentElement + ' .filter-selected'), options.timeout, options.parentElement).scrollTop(0).sortOptions();
 
             handleMovement(options);
+
+            selected.trigger('change');
         });
 
         $(options.parentElement).closest('form').submit(function() {
@@ -217,6 +221,10 @@
         $(options.parentElement + ' .selected').prop('name', $(options.element).prop('name'));
         $(options.parentElement + ' .unselected-title').text(options.availableText + ' ' + options.title);
         $(options.parentElement + ' .selected-title').text(options.selectedText + ' ' + options.title);
+
+        $("[" + idForInput + "]").change(function(eventObject) {
+            options.changeCallback(eventObject)
+        });
     }
 
     /** Creates the buttons when the dual list box is set in horizontal mode. */

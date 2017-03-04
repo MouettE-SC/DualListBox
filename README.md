@@ -17,23 +17,32 @@ There are currently two ways to use this component. First up is by using html5 `
 select tag, but you can also provide a Javascript Object. The variable names are the same all around and can be even
 mixed and matched within the select or Javascript. The current options are: 
 
-| Option            | Type    | Default    | Description |
-| ------------      | ------- | ---------- | ----------- |
-| `json`            | Boolean | true       | Whether to download the data via a JSON request.  |
-| `uri`             | URI     | local.json | The relative or absolute URI where to receive the data from. | 
-| `value`           | String  | id         | This determines what JSON field is handled as the value. |
-| `text`            | String  | name       | This determines what JSON field is handled as the text. | 
-| `title`           | String  | Example    | The title of the control. |
-| `horizontal`      | Boolean | false      | Whether the control is lay out horizontal or vertical. |
-| `timeout`         | UInt    | 500        | Timeout when to start searching with the filter. |
-| `textLength`      | UInt    | 45         | Maximum text length of when the element should contain title-attributes. |
-| `moveAllBtn`      | Boolean | true       | Whether to display the move all button (from left to right or vice-versa). |
-| `maxAllBtn`       | UInt    | 500        | Integer to determine from which length to display the warning message below. |
-| `warning`         | String  | <...>      | Warning message that is displayed when trying to move large amounts of elements. |
-| `availableText`   | String  | Available  | Text shown for available options |
-| `selectedText`    | String  | Selected   | Text shown for selected options |
-| `showingText`     | String  | showing    | Text shown for how many elements there are in the list |
-| `filterText`      | String  | Filter     | Filter text
+| Option            | Type    | Default         | Description |
+| ------------      | ------- | --------------- | ----------- |
+| `json`            | Boolean | true            | Whether to download the data via a JSON request.  |
+| `uri`             | URI     | local.json      | The relative or absolute URI where to receive the data from. | 
+| `value`           | String  | id              | This determines what JSON field is handled as the value. |
+| `text`            | String  | name            | This determines what JSON field is handled as the text. | 
+| `title`           | String  | Example         | The title of the control. |
+| `horizontal`      | Boolean | false           | Whether the control is lay out horizontal or vertical. |
+| `timeout`         | UInt    | 500             | Timeout when to start searching with the filter. |
+| `textLength`      | UInt    | 45              | Maximum text length of when the element should contain title-attributes. |
+| `moveAllBtn`      | Boolean | true            | Whether to display the move all button (from left to right or vice-versa). |
+| `maxAllBtn`       | UInt    | 500             | Integer to determine from which length to display the warning message below. |
+| `warning`         | String  | <...>           | Warning message that is displayed when trying to move large amounts of elements. |
+| `availableText`   | String  | Available       | Text shown for available options |
+| `selectedText`    | String  | Selected        | Text shown for selected options |
+| `showingText`     | String  | showing         | Text shown for how many elements there are in the list |
+| `filterText`      | String  | Filter          | Filter text
+| `changeCallback`  | Function| Empty function  | Function to call when the selected options changes 
+
+## Example
+I want to:
+- Mark all elements with class `dual-list-box` and make create them as dual lists.
+- Setting customs texts.
+- Specify a callback function, so I can do something when a change occurs.
+ 
+`$('.dual-list-box').DualListBox({selectedText: 'My chosen text', availableText: 'My available text', filterText: 'My Filter text...', showingText: 'My showing text', changeCallback: function(eventObject) {somethingChanged(eventObject)} });`
 
 ## [Demo](http://geodan.github.io/duallistbox/index.html)
 
